@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Sayang! ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --p-pink: #FFC3D7; /* Soft Pink */
+            --p-purple: #E0C3FC; /* Soft Purple */
+            --p-yellow: #FFF3B0; /* Soft Yellow */
+            --p-blue: #B3F2FD; /* Soft Blue */
+            --text-color: #5D4037; /* Brown for softness */
+            --accent: #FF8AAB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: #FDFCFB;
+            /* Background Gradient Pastel */
+            background-image: linear-gradient(135deg, #FFC3D7 0%, #E0C3FC 50%, #B3F2FD 100%);
+            height: 100vh;
+            color: var(--text-color);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+
+        /* --- DEKORASI LATAR BELAKANG --- */
+        .cloud {
+            position: absolute; background: white; border-radius: 50px;
+            opacity: 0.6; animation: floatCloud infinite linear; z-index: 1;
+        }
+        .cloud::after, .cloud::before {
+            content: ''; position: absolute; background: white; border-radius: 50%;
+        }
+        
+        /* Awan 1 */
+        .c1 { width: 100px; height: 40px; top: 10%; left: -120px; animation-duration: 20s; }
+        .c1::after { width: 50px; height: 50px; top: -25px; left: 15px; }
+        .c1::before { width: 40px; height: 40px; top: -15px; left: 50px; }
+
+        /* Awan 2 */
+        .c2 { width: 80px; height: 30px; top: 30%; left: -100px; animation-duration: 25s; animation-delay: 5s; opacity: 0.4; }
+        .c2::after { width: 40px; height: 40px; top: -20px; left: 10px; }
+
+        /* Awan 3 */
+        .c3 { width: 120px; height: 50px; top: 70%; left: -150px; animation-duration: 18s; animation-delay: 2s; }
+        .c3::after { width: 60px; height: 60px; top: -30px; left: 20px; }
+        .c3::before { width: 50px; height: 50px; top: -20px; left: 60px; }
+
+        @keyframes floatCloud {
+            0% { left: -150px; }
+            100% { left: 100%; }
+        }
+
+        .hidden { display: none !important; }
+        h1, h2 { font-family: 'Fredoka One', cursive; letter-spacing: 1px; }
+
+        /* --- CONTAINER UTAMA (ESTETIK & GLASSMORPHISM) --- */
+        .container {
+            width: 90%; max-width: 360px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 30px; padding: 30px 25px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 35px rgba(255, 138, 171, 0.2);
+            text-align: center;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes popIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+
+        /* --- 1. INTRO LAYER --- */
+        #intro-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--p-pink);
+            background-image: linear-gradient(135deg, var(--p-pink) 0%, var(--p-purple) 100%);
+            z-index: 100;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.6s; gap: 20px; text-align: center;
+        }
+
+        .intro-text { font-size: 1.6rem; color: white; font-family: 'Fredoka One', cursive; text-shadow: 2px 2px var(--accent); padding: 0 20px; }
+
+        #progress-container {
+            width: 70%; max-width: 250px; height: 20px;
+            background: rgba(255,255,255,0.5); border-radius: 10px; overflow: hidden;
+            display: none; border: 3px solid white; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #progress-bar { width: 0%; height: 100%; background: var(--accent); border-radius: 10px; transition: width 0.1s; }
+
+        /* --- 2. GAME LAYER (CUTE & BOUNCY) --- */
+        .grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 12px; margin: 25px 0;
+        }
+
+        .card-game {
+            aspect-ratio: 1/1; background: white;
+            border-radius: 15px; display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 10px rgba(255, 138, 171, 0.1);
+            border: 2px solid transparent;
+        }
+        .card-game:active { transform: scale(0.9); }
+        .card-game.flipped { background: var(--p-yellow); transform: rotateY(180deg); border-color: var(--accent); }
+        .card-game span { display: none; }
+        .card-game.flipped span { display: block; transform: rotateY(180deg); }
+
+        /* --- 3. CAKE LAYER --- */
+        .cake { font-size: 5.5rem; margin: 20px 0; position: relative; animation: wobble 2s infinite; display: inline-block;}
+        .flame {
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            animation: flicker 0.2s infinite alternate; font-size: 1.5rem;
+        }
+        @keyframes flicker { from { opacity: 0.8; transform: translateX(-50%) scale(1); } to { opacity: 1; transform: translateX(-50%) scale(1.3); } }
+        @keyframes wobble { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+        /* --- 4. FINAL CARD LAYER --- */
+        .photo-wrapper {
+            width: 130px; height: 130px; margin: -80px auto 15px;
+            border-radius: 50%; border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(255, 138, 171, 0.3);
+            overflow: hidden; position: relative;
+        }
+        .photo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        /* Efek kilau di foto */
+        .photo-wrapper::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg); animation: shine 3s infinite;
+        }
+        @keyframes shine { 0% { left: -100%; top: -100%; } 100% { left: 100%; top: 100%; } }
+
+        h1 { font-size: 1.5rem; color: var(--accent); margin-bottom: 5px; text-shadow: 1px 1px white; }
+        
+        .wish-box {
+            background: rgba(255, 255, 255, 0.8); color: var(--text-color);
+            padding: 18px; border-radius: 20px; margin-top: 15px;
+            font-size: 0.9rem; line-height: 1.6; min-height: 120px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.3s; border: 2px solid white;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .wish-box:hover { background: white; }
+
+        /* --- BUTTONS & DOTS (BOUNCY) --- */
+        button {
+            background: var(--accent); border: none; padding: 12px 30px;
+            color: white; border-radius: 25px; cursor: pointer;
+            font-weight: bold; font-family: 'Poppins', sans-serif;
+            margin-top: 20px; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(255, 138, 171, 0.4);
+            font-size: 1rem;
+        }
+        button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(255, 138, 171, 0.5); }
+        button:active { transform: translateY(1px) scale(0.95); }
+
+        .dot { display: inline-block; width: 10px; height: 10px; background: rgba(0,0,0,0.1); border-radius: 50%; margin: 0 5px; transition: 0.3s; }
+        .dot.active { background: var(--accent); transform: scale(1.3); }
+
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+        .floating-gif { position: fixed; width: 110px; z-index: 10; pointer-events: none; animation: wobble 3s infinite; }
+        
+        /* Hati melayang di background */
+        .heart-bg {
+            position: absolute; color: var(--accent); opacity: 0.3; animation: floatHeart infinite linear; z-index: 2;
+        }
+        @keyframes floatHeart {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .shake { animation: shakeIntro 0.1s infinite; }
+        @keyframes shakeIntro { 0% { transform: translate(1px, 1px) rotate(0deg); } 50% { transform: translate(-1px, -2px) rotate(-1deg); } 100% { transform: translate(1px, 2px) rotate(1deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+
+    <audio id="music" loop>
+        <source src="./HBD_BOCILLLLLLL.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="intro-layer" onclick="handleIntroTap()">
+        <div id="intro-text" class="intro-text">Halo Sayangku... ✨</div>
+        <div id="progress-container"><div id="progress-bar"></div></div>
+        <div id="hint-text" style="font-size: 0.9rem; color: white; opacity: 0.8; margin-top: 10px;">(Ketuk layar ya Bunny)</div>
+    </div>
+
+    <div id="sec-game" class="container hidden">
+        <h2>Game Gemes! 🐾</h2>
+        <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 5px;">Temukan 4 pasang hewan kembar!</p>
+        <div class="grid" id="gameGrid"></div>
+    </div>
+
+    <div id="sec-candle" class="container hidden">
+        <h2>Make a Wish ✨</h2>
+        <p style="font-size: 0.85rem; margin-top:5px;">Pejamkan mata.. minta yang banyak..</p>
+        <div class="cake-wrapper" style="text-align:center;">
+            <div class="cake">
+                <span class="flame" id="flame">🔥</span>
+                🎂
+            </div>
+        </div>
+        <button id="btnBlow" onclick="blowCandle()">Tiup Lilinnya Bunn!</button>
+    </div>
+
+    <div id="sec-final" class="container hidden">
+        <div class="photo-wrapper">
+            <img src="./BOCILLLLLLLLLLLLL.jpeg" alt="Birthday Girl Bunn">
+        </div>
+        <h1>HAPPY BIRTHDAY Bunn! 🥳</h1>
+        <p style="font-size: 0.75rem; color: #555; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px;">PRICE SONYA MEI KODISTA</p>
+        <div class="wish-box" onclick="nextSlide()"><div id="wish-content"></div></div>
+        <div class="dots" id="dotsContainer" style="margin-top:10px;"></div>
+        <button onclick="location.reload()" style="opacity: 0.5; font-size: 0.6rem; padding: 5px 15px; background: #888;">Main Lagi</button>
+    </div>
+
+    <canvas id="confetti"></canvas>
+    <div id="gif-container"></div>
+
+    <script>
+        // Teks Intro lebih lucu
+        const introTexts = ["Halo Sayangku... ✨", "Cie ada yang makin tua nih.. 😜", "Bercanda Bunn, makin cantik kok! 💖", "Main game cimit dulu yuk?", "Gampang banget, buat Bunn apa sih yang susah.", "Siap Bunny?", "3... (Meow)", "2... (Woof)", "1... (Bunny)", "TAP CEPAT DI SINI BUNN!! 🔥"];
+        
+        // Teks Ucapan (Diperbaiki typo sedikit agar estetik)
+        const slides = [
+            `Selamat ulang tahun yang ke-17 (eh ke-20 ya? 😋) Bocilllllll! Semoga kamu sehat selalu, makin semangat, makin pinter, dan semua impianmu tercapai. <br><br><b style="color:var(--accent);">(Klik kotak ini Bunn... 👉)</b>`,
+            `Mas minta maaf ya belum bisa kasih kado fisik tahun ini, tapi nanti kita jalan-jalan bareng sepuasnya ya! Kado nyusul! Maafin mas juga kalau selama ini mas usil banget bikin kamu marah-marah. 😁 <br><br><b style="color:var(--accent);">(Klik lagi... 👉)</b>`,
+            `Moga-moga dengan datangnya hari istimewa ini kamu jadi pribadi yang lebih baik dan makin dewasa. Ingat, semangat kuliahnya jangan males-males! Selamat menikmati hari terbaikmu Bocilllllll.<br><br><b>Happy Birthday Sayangku! 💖 Enjoy your day!</b>`
+        ];
+
+        // Emoji Hewan Lucu
+        const emojis = ['🐱', '🐱', '🐶', '🐶', '🐰', '🐰', '🐼', '🐼'];
+        
+        let introIdx = 0, tapCount = 0, maxTaps = 20, isTapMode = false, currentSlide = 0, matches = 0, flippedCards = [];
+        const music = document.getElementById('music');
+
+        // Bikin hati terbang di background
+        function createHearts() {
+            for(let i=0; i<10; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-bg';
+                    heart.innerHTML = '💖';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = (Math.random() * 1 + 0.5) + 'rem';
+                    heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 8000);
+                }, i * 300);
+            }
+        }
+        createHearts();
+        setInterval(createHearts, 10000);
+
+        function handleIntroTap() {
+            music.play().then(() => { music.pause(); music.currentTime = 0; }).catch(() => {});
+            if (!isTapMode) {
+                introIdx++;
+                if (introIdx < introTexts.length) {
+                    document.getElementById('intro-text').innerText = introTexts[introIdx];
+                    if (introIdx === introTexts.length - 1) {
+                        isTapMode = true;
+                        document.getElementById('progress-container').style.display = 'block';
+                        document.getElementById('hint-text').classList.add('hidden');
+                    }
+                }
+            } else {
+                tapCount++;
+                document.getElementById('progress-bar').style.width = (tapCount / maxTaps) * 100 + '%';
+                document.getElementById('intro-layer').classList.add('shake');
+                setTimeout(() => document.getElementById('intro-layer').classList.remove('shake'), 50);
+                if (tapCount >= maxTaps) {
+                    document.getElementById('intro-layer').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('intro-layer').classList.add('hidden');
+                        document.getElementById('sec-game').classList.remove('hidden');
+                        initGame();
+                    }, 600);
+                }
+            }
+        }
+
+        function initGame() {
+            const grid = document.getElementById('gameGrid');
+            const shuffled = emojis.sort(() => Math.random() - 0.5);
+            shuffled.forEach(emoji => {
+                const card = document.createElement('div');
+                card.className = 'card-game';
+                card.innerHTML = `<span>${emoji}</span>`;
+                card.onclick = () => {
+                    if (card.classList.contains('flipped') || flippedCards.length === 2) return;
+                    card.classList.add('flipped');
+                    flippedCards.push(card);
+                    if (flippedCards.length === 2) {
+                        if (flippedCards[0].innerText === flippedCards[1].innerText) {
+                            matches++;
+                            flippedCards = [];
+                            if (matches === 4) setTimeout(() => {
+                                document.getElementById('sec-game').classList.add('hidden');
+                                document.getElementById('sec-candle').classList.remove('hidden');
+                            }, 800);
+                        } else {
+                            setTimeout(() => { flippedCards.forEach(c => c.classList.remove('flipped')); flippedCards = []; }, 600);
+                        }
+                    }
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        function blowCandle() {
+            document.getElementById('flame').classList.add('hidden');
+            document.getElementById('btnBlow').innerText = "Wishes Sent! ✨";
+            document.getElementById('btnBlow').style.background = "#5cb85c";
+            music.play();
+            setTimeout(() => {
+                document.getElementById('sec-candle').classList.add('hidden');
+                document.getElementById('sec-final').classList.remove('hidden');
+                startConfetti(); spawnGifs(); nextSlide();
+            }, 1000);
+        }
+
+        function nextSlide() {
+            const content = document.getElementById('wish-content');
+            const dotsCont = document.getElementById('dotsContainer');
+            content.style.opacity = 0;
+            setTimeout(() => {
+                content.innerHTML = slides[currentSlide];
+                content.style.opacity = 1;
+                dotsCont.innerHTML = '';
+                slides.forEach((_, i) => {
+                    const d = document.createElement('span');
+                    d.className = `dot ${i === currentSlide ? 'active' : ''}`;
+                    dotsCont.appendChild(d);
+                });
+                currentSlide = (currentSlide + 1) % slides.length;
+            }, 200);
+        }
+
+        function spawnGifs() {
+            // GIF diganti yang lebih cute/soft
+            const urls = ["https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1dW5wM3V5b3pscjVvYTA4MGY4cmVwbmRibXoxN2xhYWF4MXVvNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbAmVUetR0TBCd479J/giphy.gif", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXN6cmNsaW11NGo5N2lna3VjdTZ2azJibzdkZHFid2tvdW44YTh0MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kYI7H1S00b46M01EUT/giphy.gif"];
+            const container = document.getElementById('gif-container');
+            for(let i=0; i<4; i++) {
+                const img = document.createElement('img');
+                img.src = urls[i % 2]; img.className = 'floating-gif';
+                img.style.top = (i < 2 ? '2%' : '78%');
+                img.style.left = (i % 2 === 0 ? '2%' : '72%');
+                img.style.width = '90px'; // sedikit diperkecil agar tidak menutupi
+                container.appendChild(img);
+            }
+        }
+
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
+        function startConfetti() {
+            // Warna confetti pastel
+            const colors = ['#FFC3D7', '#E0C3FC', '#B3F2FD', '#FFF3B0', '#FF8AAB'];
+            for(let i=0; i<100; i++) particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height-canvas.height, size: Math.random()*6+2, speedY: Math.random()*2+1, speedX: Math.random()*2-1, color: colors[Math.floor(Math.random()*colors.length)] });
+            updateConfetti();
+        }
+        function updateConfetti() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p => { p.y += p.speedY; p.x += p.speedX; if(p.y > canvas.height) p.y = -10; ctx.fillStyle = p.color; ctx.fillRect(p.x, p.y, p.size, p.size); });
+            requestAnimationFrame(updateConfetti);
+        }
+    </script>
+</body>
+</html>
